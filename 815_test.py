@@ -33,7 +33,7 @@ def setPRESCALE():
 	# set prescaler
 	print 'Setting prescaler'
 	print bin(bus.read_byte_data(address, 0xfe))
-	bus.write_byte_data(address, 0xfe, 0x04)
+	bus.write_byte_data(address, 0xfe, 0b01100101)
 	time.sleep(1)
 	
 	normalMODE()

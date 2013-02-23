@@ -16,6 +16,7 @@ class PWM :
   __SUBADR2            = 0x03
   __SUBADR3            = 0x04
   __MODE1              = 0x00
+  __MODE2              = 0x01
   __PRESCALE           = 0xFE
   __LED0_ON_L          = 0x06
   __LED0_ON_H          = 0x07
@@ -33,6 +34,12 @@ class PWM :
     if (self.debug):
       print "Reseting PCA9685"
     self.i2c.write8(self.__MODE1, 0x00)
+    self.i2c.write8(self.__MODE2, 0x08)
+
+  def sleepMODE():
+    oldmode = self.i2c.readU8(self.__MODE1);
+    newmode = (oldmode & 0x7F) | 0x10             # sleep
+    self.i2c.write8(self.__MODE1, newmode)
 
   def setPWMFreq(self, freq):
     "Sets the PWM frequency"
