@@ -47,28 +47,28 @@ def SetPWM1():
 	time.sleep(2)
 
 def SetPWM2():
-        print 'Setting PWM 2'
-        bus.write_byte_data(address, 0x06, 0b00000000)
-        bus.write_byte_data(address, 0x07, 0x00000000)
- 	bus.write_byte_data(address, 0x08, 0b11111111)
-        bus.write_byte_data(address, 0x09, 0b00000100)
-        time.sleep(2)
+	print 'Setting PWM 2'
+	bus.write_byte_data(address, 0x06, 0b00000000)
+	bus.write_byte_data(address, 0x07, 0x00000000)
+	bus.write_byte_data(address, 0x08, 0b11111111)
+	bus.write_byte_data(address, 0x09, 0b00000100)
+	time.sleep(2)
 
 def SetPWM3():
-        print 'Setting PWM 3'
-        bus.write_byte_data(address, 0x06, 0b00000000)
-        bus.write_byte_data(address, 0x07, 0x00000000)
- 	bus.write_byte_data(address, 0x08, 0b00000000)
-        bus.write_byte_data(address, 0x09, 0b00001000)
-        time.sleep(2)
+	print 'Setting PWM 3'
+	bus.write_byte_data(address, 0x06, 0b00000000)
+	bus.write_byte_data(address, 0x07, 0x00000000)
+	bus.write_byte_data(address, 0x08, 0b00000000)
+	bus.write_byte_data(address, 0x09, 0b00001000)
+	time.sleep(2)
 
 def SetPWM4():
-        print 'Setting PWM 4'
-        bus.write_byte_data(address, 0x06, 0b00000000)
-        bus.write_byte_data(address, 0x07, 0x00000000)
- 	bus.write_byte_data(address, 0x08, 0b11111111)
-        bus.write_byte_data(address, 0x09, 0b00001111)
-        time.sleep(2)
+	print 'Setting PWM 4'
+	bus.write_byte_data(address, 0x06, 0b00000000)
+	bus.write_byte_data(address, 0x07, 0x00000000)
+	bus.write_byte_data(address, 0x08, 0b11111111)
+	bus.write_byte_data(address, 0x09, 0b00001111)
+	time.sleep(2)
 
 def GetPWM():
 	onL = bus.read_byte_data(address, 0x06)
@@ -90,4 +90,4 @@ def main():
   	sleepMODE()
 
 if __name__ == "__main__":
-   main()
+	main()
