@@ -29,6 +29,7 @@ while (True):
   # Change speed of continuous servo on channel O
   pwm.setPWM(0, 0, 1000)
   time.sleep(2)
+  pwm.set_mode('sleep')
 #  pwm.setPWM(0, 0, servoMax)
 #  time.sleep(2)
   break
