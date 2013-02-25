@@ -36,11 +36,11 @@ class PWM :
 		self.i2c.write8(self.__MODE1, 0x00)
 		self.i2c.write8(self.__MODE2, 0x08)
 
-	def sleep_mode(self, sleep=True):
+	def sleepMODE(self, sleep=True):
 		sleepbit = 0x10
 		oldmode = self.i2c.readU8(self.__MODE1)
-		sleepon = (oldmode & sleepbit)
-		if (sleep is True and sleepon == 0) or (sleep is False  and sleepon > 0):
+		chksleep = (oldmode & sleepbit)
+		if (sleep is True and chksleep == 0) or (sleep is False  and chksleep > 0):
 			newmode = (oldmode ^ sleepbit)
 		else:
 			newmode = oldmode
