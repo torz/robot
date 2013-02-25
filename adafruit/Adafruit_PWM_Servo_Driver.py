@@ -37,17 +37,17 @@ class PWM :
 		self.i2c.write8(self.__MODE2, 0x08)
 
 	def setMODE(self, myMODE='sleep'):
-		oldmode = self.i2c.readU8(self.__MODE1);
 		if myMODE == 'sleep':
-			newmode = (oldmode & 0x7F) | 0x10						 # sleep
-			self.i2c.write8(self.__MODE1, newmode)
+			self.i2c.write8(self.__MODE1, 0x10)
 			time.sleep(0.005)
 			return
 		if myMODE == 'restart':
-			if bin(oldmode)[-5] == 1:
-				self.i2c.write8(self.__MODE1, 0b00000000)
-				time.sleep(0.005)
+			self.i2c.write8(self.__MODE1, 0b00000000)
+			time.sleep(0.005)
 			self.i2c.write8(self.__MODE1, 0x80)
+			return
+		if myMODE == 'up':
+			self.i2c.write8(self.__MODE1, 0x00)
 			return
 
 	def setPWMFreq(self, freq):
