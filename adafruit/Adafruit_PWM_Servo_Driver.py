@@ -36,19 +36,16 @@ class PWM :
 		self.i2c.write8(self.__MODE1, 0x00)
 		self.i2c.write8(self.__MODE2, 0x08)
 
-	def setMODE(self, myMODE='sleep'):
-		if myMODE == 'sleep':
-			self.i2c.write8(self.__MODE1, 0x10)
-			time.sleep(0.005)
-			return
-		if myMODE == 'restart':
-			self.i2c.write8(self.__MODE1, 0b00000000)
-			time.sleep(0.005)
-			self.i2c.write8(self.__MODE1, 0x80)
-			return
-		if myMODE == 'up':
-			self.i2c.write8(self.__MODE1, 0x00)
-			return
+	def sleep_mode(self, sleep=True):
+		sleepbit = 0x10
+		oldmode = self.i2c.readU8(self.__MODE1)
+		sleepon = (oldmode & sleepbit)
+		if (sleep is True and sleepon == 0) or (sleep is False  and sleepon > 0):
+			newmode = (oldmode ^ sleepbit)
+		else:
+			newmode = oldmode
+		self.i2c.write8(self.__MODE1, newmode)
+		time.sleep(0.005)
 
 	def setPWMFreq(self, freq):
 		"Sets the PWM frequency"
@@ -63,7 +60,7 @@ class PWM :
 		if (self.debug):
 			print "Final pre-scale: %d" % prescale
 
-		oldmode = self.i2c.readU8(self.__MODE1);
+		oldmode = self.i2c.readU8(self.__MODE1)
 		newmode = (oldmode & 0x7F) | 0x10						 # sleep
 		self.i2c.write8(self.__MODE1, newmode)				# go to sleep
 		self.i2c.write8(self.__PRESCALE, int(math.floor(prescale)))
