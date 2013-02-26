@@ -11,18 +11,18 @@ PWM for DC motor speed control:
 
 MODE1
 
- |------------------ RESTART
- | |---------------- EXTCLK 
- | |   |------------ SLEEP
- | |   |
- | |   |       |---- ALLCALL
- 0 0 0 0 0 0 0 0
+	 |------------------ RESTART
+	 | |---------------- EXTCLK 
+	 | |   |------------ SLEEP
+	 | |   |
+	 | |   |       |---- ALLCALL
+	 0 0 0 0 0 0 0 0
 
 MODE2
 
-         |----------- Change on ACK = 1
-         |
- 0 0 0 0 0 0 0 0
+	         |----------- Change on ACK = 1
+	         |
+	 0 0 0 0 0 0 0 0
 
 
 Motor direction control:
