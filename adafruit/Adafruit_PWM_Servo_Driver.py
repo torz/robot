@@ -36,7 +36,7 @@ class PWM :
 		self.i2c.write8(self.__MODE1, 0x00)
 		self.i2c.write8(self.__MODE2, 0x08)
 
-	def sleepMODE(self, sleep=True):
+	def setSLEEPMode(self, sleep=True):
 		sleepbit = 0x10
 		oldmode = self.i2c.readU8(self.__MODE1)
 		chksleep = (oldmode & sleepbit)
@@ -46,6 +46,10 @@ class PWM :
 			newmode = oldmode
 		self.i2c.write8(self.__MODE1, newmode)
 		time.sleep(0.005)
+
+	def setRESTART(self):
+		setSLEEPMode()
+		self.i2c.write8(self.__MODE1, 0x40)
 
 	def setPWMFreq(self, freq):
 		"Sets the PWM frequency"
