@@ -35,7 +35,7 @@ class PWM :
 			print "Reseting PCA9685"
 		self.i2c.write8(self.__MODE1, 0x00)
 		self.i2c.write8(self.__MODE2, 0x08)
-		self.setPWMFreq(self)
+		self.setPWMFreq()
 
 	def setSLEEPMode(self, sleep=True):
 		sleepbit = 0x10
@@ -81,4 +81,4 @@ class PWM :
 		self.i2c.write8(self.__LED0_OFF_H+4*channel, off >> 8)
 
 	def setPWMpercent(self, channel, part):
-		setPWM(self, channel, 0, int(round(40.95 * part))
+		self.setPWM(channel, 0, int(round(40.95 * part)))
