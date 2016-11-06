@@ -41,13 +41,7 @@ def right():
 
 def main():
     forward()
-    sleep(3)
-    reverse()
-    sleep(3)
-    left()
-    sleep(3)
-    right()
-    sleep(3)
+    sleep(5)
 
     print('cleanup')
     GPIO.cleanup()
