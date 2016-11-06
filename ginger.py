@@ -3,55 +3,58 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
-GPIO.setmode(GPIO.BCM)
+class Ginger():
 
-print('setting pins to out')
-GPIO.setup(17, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
-GPIO.setup(26, GPIO.OUT)
-GPIO.setup(20, GPIO.OUT)
+    runtime = 1
 
-def forward():
-    print('forward')
-    GPIO.output(17, True)
-    GPIO.output(18, False)
-    GPIO.output(26, True)
-    GPIO.output(20, False)
+    def setup(self):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(17, GPIO.OUT)
+        GPIO.setup(18, GPIO.OUT)
+        GPIO.setup(26, GPIO.OUT)
+        GPIO.setup(20, GPIO.OUT)
 
-def reverse():
-    print('reverse')
-    GPIO.output(17, False)
-    GPIO.output(18, True)
-    GPIO.output(26, False)
-    GPIO.output(20, True)
+    def forward(self):
+        print('forward')
+        self.setup()
+        GPIO.output(17, True)
+        GPIO.output(18, False)
+        GPIO.output(26, True)
+        GPIO.output(20, False)
+        sleep(self.runtime)
+        GPIO.cleanup()
 
-def left():
-    print('left')
-    GPIO.output(17, True)
-    GPIO.output(18, False)
-    GPIO.output(26, False)
-    GPIO.output(20, True)
 
-def right():
-    print('right')
-    GPIO.output(17, False)
-    GPIO.output(18, True)
-    GPIO.output(26, True)
-    GPIO.output(20, False)
+    def reverse(self):
+        print('reverse')
+        self.setup()
+        GPIO.output(17, False)
+        GPIO.output(18, True)
+        GPIO.output(26, False)
+        GPIO.output(20, True)
+        sleep(self.runtime)
+        GPIO.cleanup()
 
-def main():
-    forward()
-    sleep(3)
-    reverse()
-    sleep(3)
-    left()
-    sleep(3)
-    right()
-    sleep(3)
+    def left(self):
+        print('left')
+        self.setup()
+        GPIO.output(17, True)
+        GPIO.output(18, False)
+        GPIO.output(26, False)
+        GPIO.output(20, True)
+        sleep(self.runtime)
+        GPIO.cleanup()
 
-    print('cleanup')
-    GPIO.cleanup()
-    print('exit')
+    def right(self):
+        print('right')
+        self.setup()
+        GPIO.output(17, False)
+        GPIO.output(18, True)
+        GPIO.output(26, True)
+        GPIO.output(20, False)
+        sleep(self.runtime)
+        GPIO.cleanup()
 
-if __name__ == '__main__':
-    main()
+    def stop(self):
+        GPIO.cleanup()
+
