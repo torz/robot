@@ -1,35 +1,41 @@
 import ginger
 from flask import Flask
+from flask_socketio import SocketIO, emit
 
 g = ginger.Ginger()
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
-@app.route("/forward")
-def forward():
+@app.route('/')
+def index():
+    return 'welcome'
+
+@socketio.on('forward')
+def forward(message):
     g.forward()
-    return "forward"
+    emit('msg', {'data': 'go'})
 
-@app.route("/reverse")
-def reverse():
+@socketio.on('reverse')
+def forward(message):
     g.reverse()
-    return "/reverse"
+    emit('msg', {'data': 'go'})
 
-@app.route("/left")
-def left():
+@socketio.on('left')
+def forward(message):
     g.left()
-    return "left"
+    emit('msg', {'data': 'go'})
 
-@app.route("/right")
-def right():
+@socketio.on('right')
+def forward(message):
     g.right()
-    return "right"
+    emit('msg', {'data': 'go'})
 
-@app.route("/")
+@socketio.on('disconnect')
 def stop():
     g.stop()
-    return "stop"
+    print('Client disconnected')
 
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+if __name__ == '__main__':
+    socketio.run(app)
