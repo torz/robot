@@ -1,5 +1,5 @@
 import ginger
-from flask import Flask
+from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 
 g = ginger.Ginger()
@@ -10,7 +10,7 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-    return 'welcome'
+    return render_template('index.html')
 
 @socketio.on('forward')
 def forward(message):
